@@ -21,8 +21,9 @@ int main()
   auto va = A.begin();
   auto vb = B.begin();
   size_t i = 0;
+  // 注意所归并的两个元素相等时得优先考虑向量A中的元素.
   while (va != A.end() && vb != B.end())
-      C[i++] = *va < *vb ? *va++ : *vb++;
+      C[i++] = *vb < *va ? *vb++ : *va++;
   while (va != A.end())
     C[i++] = *va++;
   while (vb != B.end())
@@ -42,11 +43,12 @@ int main()
   list<string> E {"Dijkstra", "Floyd", "Warshall"};
   auto ld = D.begin();
   auto le = E.begin();
+  // 注意所归并的两个元素相等时得优先考虑链表D中的元素.
   while (ld != D.end() && le != E.end())
-    if (*ld < *le)
-      ++ld;
-    else
+    if (*le < *ld)
       D.insert(ld, *le++);
+    else
+      ++ld;
   D.insert(ld, le, E.end());
   print_all(D);
   return 0;

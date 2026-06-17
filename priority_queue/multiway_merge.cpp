@@ -16,6 +16,7 @@ void merge(const vector<vector<T>>& V, vector<T>& S)
   // 以范围形式描述当前待处理的有序序列.
   using range = pair<decltype(V[0].begin()), decltype(V[0].end())>;
   auto cmp = [](range a, range b) { return *(b.first) < *(a.first); };
+  // 基于堆的多路归并若用于排序, 较难保证排序的稳定性.
   priority_queue<range, vector<range>, decltype(cmp)> PQ(cmp);
   for (const auto& X : V)
     if (X.begin() != X.end())
